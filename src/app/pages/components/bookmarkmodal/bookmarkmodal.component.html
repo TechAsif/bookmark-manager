@@ -1,0 +1,90 @@
+<ng-template #content let-c="close" let-d="dismiss">
+ 
+<form [formGroup]="bookMarkForm" (ngSubmit)="addBookMark(bookMarkForm.value)"> 
+  <div class="modal-body">
+    <p>Add Bookmark</p>
+        <div class="row">
+            
+                <div class="row">
+              
+                    <div class="col-md-8 mt-3">
+                    <input type="text" name="title" placeholder="Title" formControlName="title" class="form-control">
+                    <span class="error text-danger" *ngIf="validateTitle()"> Please Give The Correct Title </span>
+                    </div>
+                </div>
+                <div class="row">
+                
+                    <div class="col-md-8 mt-3">
+                        <input type="text" placeholder="Url" name="url" formControlName="url" class="form-control"  >
+                        <span class="error text-danger" *ngIf="validateUrl()"> Please Give The Valid URL</span>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                   
+                    <div class="col-md-6">
+                      <ng-select  formControlName="category"  [items]="categoryTypeList" placeholder="Category" [(ngModel)]="selectedCategory" (change)="onSelectDolil(selectedCategory, $event)" bindLabel="name" bindValue="name"></ng-select>                        <span class="error text-danger" *ngIf="validateCategory()"> Please Give The Category Name </span>
+
+                    </div>
+                    <div class=" col-md-2 btn btn-sm btn-outline-primary" (click)="changeIsAddNewCategory()" style="cursor: pointer;">
+                     +
+
+                  </div>
+                </div>
+
+                <div *ngIf="isAddNewCategory" class="row">
+                
+                    <div class="col-md-8 mt-3">
+                      <input type="text" placeholder="New Category" name="newcategory" formControlName="newcategory" class="form-control"  >
+                        <span class="error text-danger" *ngIf="validateNewCategory()"> Please Give the new category </span>
+
+                    </div>
+
+                    
+                </div>
+
+                
+            
+        </div>
+  </div>
+  <div class="modal-footer modal-footer-dflex" style="display:flex; ">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Cancel</button>
+    <button type="submit" class="btn btn-secondary">Save</button>
+    
+  </div>
+</form>
+</ng-template>
+<div class="dflex">
+    <div>
+      <h2>Bookmark Manager</h2>
+    </div>
+    <div>
+      <button class="btn btn-sm btn-outline-primary" (click)="open(content)">Add Bookmark</button> 
+    </div>
+</div>
+
+
+<div class="row ms-3">
+  <div class="col-md-6">
+    <div *ngFor="let categoryList of categoryList" style="height: 300px; overflow: hidden;">
+      <h2>{{categoryList.name}}</h2>
+      
+       <div style="height:250px; overflow: auto;width: 300px;border: 1px solid black;
+       padding: 8px;" >
+        <div class="bookmarklist-dflex" *ngFor="let bookMarkList of bookMarkList">
+          <p *ngIf="bookMarkList.category == categoryList.name">
+            {{bookMarkList.title}}
+          </p>
+          <button *ngIf="bookMarkList.category == categoryList.name" (click)="showDetails(bookMarkList)"> Details</button>
+       </div>
+       </div>
+    </div>
+   
+  </div>
+  <div class="col-md-6 display-details">
+   <p>Title: {{displayObject.title}}</p>
+   <a [href]="displayObject.url">URL: {{displayObject.url}}</a>
+   <p>Category: {{displayObject.category}}</p>
+  </div>
+</div>
