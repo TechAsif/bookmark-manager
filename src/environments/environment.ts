@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  apiTypeUrl: 'https://xrmpc7dwh3.execute-api.us-east-1.amazonaws.com/dev/api/v1/',
-  apiMowjaUrl: 'https://xrmpc7dwh3.execute-api.us-east-1.amazonaws.com/dev/api/v1/',
-  apiUrl: 'https://xrmpc7dwh3.execute-api.us-east-1.amazonaws.com/dev/api/v1/',
+  
 
   // apiTypeUrl: 'http://localhost:3002/api/v1/',
   // apiMowjaUrl: 'http://localhost:3002/api/v1/',
